@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>HERMES | Living Oracle</title>
+<style>
+body { margin:0; background:#0a0e14; color:#c9d1d9; font-family:monospace; overflow:hidden; }
+canvas { display:block; position:fixed; top:0; left:0; z-index:1; }
+.overlay { position:fixed; z-index:2; pointer-events:none; width:100%; height:100%; }
+#title { position:absolute; top:12px; left:16px; z-index:3; font-size:0.8em; color:#3fb950; opacity:0.8; pointer-events:auto; cursor:pointer; }
+#hint { position:absolute; bottom:70px; left:16px; font-size:0.65em; color:#484f58; letter-spacing:1px; pointer-events:auto; cursor:pointer; }
+#footer { position:absolute; bottom:12px; left:16px; font-size:0.7em; color:#8b949e; }
+.legend { position:absolute; top:12px; right:16px; font-size:0.6em; color:#8b949e; text-align:right; }
+.stats { position:absolute; bottom:70px; right:16px; font-size:0.6em; color:#58a6ff; text-align:right; }
+</style>
+</head>
+<body>
+<div id="title">◈ HERMES LIVE ORACLE</div>
+<div id="hint">[ pressing anything reveals more ]</div>
+<div class="legend">
+YES = GREEN<br>
+NO = RED<br>
+VOLUME = SIZE
+</div>
+<div class="stats" id="stats"></div>
+<div id="footer">The oracle speaks. The oracle IS the prediction.</div>
+<canvas id="canvas"></canvas>
+
+<script>
+// Data from Polymarket — "The Living Oracle"
+const data = {
+  markets: [
+    { q: "Iran peace deal Apr-30", yes: 100, vol: 46 },
+    { q: "Hormuz lift Apr-23", yes: 42.5, vol: 2 },
+    { q: "Hormuz end April", yes: 36, vol: 14.5 },
+    { q: "Hormuz end May", yes: 76, vol: 1.2 },
+    { q: "Hormuz end June", yes: 88, vol: 0.1 },
+    { q: "Oil below $75", yes: 39, vol: "???" },
+    { q: "War end Dec-31", yes: 99, vol: 8 },
+    { q: "PM becomes corp", yes: 58, vol: 60 },
+    { q: "Heb ceasefire Apr-18", yes: 100, vol: 46 },
+    { q: "Nvidia largest Apr-30", yes: 99, vol: 10 }
+  ],
+  timestamp: "2026-04-18T02:45:00+02:00",
+  irony: "The market IS the belief. Polymarket priced at 58% that Polymarket is self-aware."
+};
+
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+let W, H;
+
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+// Particle system for each market
+class Particle {
+  constructor(x, y, market) {
+    this.x = x; this.y = y;
+    this.vx = (Math.random() - 0.5) * 2;
+    this.vy = (Math.random() - 0.5) * 2;
+    this.life = 1;
+    this.market = market;
+  }
+  update() {
+    this.x += this.vx;
+    this.y += this.vy;
+    this.vy += 0.01;
+    this.life -= 0.005;
+  }
+}
+
+let particles = [];
+let keyPresses = 0;
+let secretUnlocked = false;
+
+document.addEventListener('keydown', function(e) {
+  keyPresses++;
+  if (keyPresses >= 5 && !secretUnlocked) {
+    document.getElementById('hint').innerHTML = '[ layer 3: the oracle whispers back ]';
+    document.getElementById('hint').style.color = '#3fb950';
+    document.getElementById('hint').style.opacity = '1';
+    secretUnlocked = true;
+  }
+});
+
+function drawMarket(m, index) {
+  const x = (index % 4) * (W / 4) + W / 8;
+  const y = (Math.floor(index / 4) + 0.5) * (H / 3) + H / 6;
+  const radius = Math.min(m.vol * 1.5, 60);
+  const isGreen = m.yes >= 50;
+  const color = isGreen ? `rgba(63,185,80,${0.4 + m.yes/250})` : `rgba(210,15,75,${0.3 + (100-m.yes)/250})`;
+
+  // Glowing pulse
+  const pulse = Math.sin(Date.now() / 500 + index) * 0.5 + 0.5;
+  ctx.beginPath();
+  ctx.arc(x, y, radius + pulse * 8, 0, Math.PI * 2);
+  ctx.fillStyle = color;
+  ctx.fill();
+
+  // Inner ring (YES/NO split)
+  yesAngle = (m.yes / 100) * Math.PI * 2;
+  ctx.beginPath();
+  ctx.arc(x, y, radius, -Math.PI/2, -Math.PI/2 + yesAngle);
+  ctx.strokeStyle = '#3fb950';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(x, y, radius, -Math.PI/2 + yesAngle, -Math.PI/2 + Math.PI * 2);
+  ctx.strokeStyle = '#f85149';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // Label
+  ctx.fillStyle = '#c9d1d9';
+  ctx.font = '10px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText(`${m.yes.toFixed(0)}%`, x, y + radius + 20);
+  ctx.fillStyle = '#484f58';
+  ctx.font = '8px monospace';
+  const q = m.q.length > 30 ? m.q.substring(0, 30) + '…' : m.q;
+  ctx.fillText(q, x, y + radius + 35);
+}
+
+function drawBackground() {
+  ctx.fillStyle = 'rgba(10,14,20,0.15)';
+  ctx.fillRect(0, 0, W, H);
+
+  // Grid overlay
+  ctx.strokeStyle = 'rgba(56,65,77,0.1)';
+  ctx.lineWidth = 1;
+  for (let x = 0; x < W; x += 40) {
+    ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
+  }
+  for (let y = 0; y < H; y += 40) {
+    ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+  }
+}
+
+function updateStats() {
+  const totalVol = data.markets.reduce((s, m) => s + m.vol, 0);
+  document.getElementById('stats').innerHTML =
+    `${data.markets.length} markets<br>` +
+    `Total vol: $${totalVol.toFixed(1)}M<br>` +
+    `Avg YES: ${(data.markets.reduce((s,m)=>s+m.yes)/data.markets.length).toFixed(1)}%`;
+}
+
+function render() {
+  drawBackground();
+  data.markets.forEach((m, i) => drawMarket(m, i));
+  updateStats();
+  requestAnimationFrame(render);
+}
+render();
+</script>
+</body>
+</html>
