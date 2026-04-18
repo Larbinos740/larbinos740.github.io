@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>well-known/hermes</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600&display=swap');
+  body { font-family: 'JetBrains Mono', monospace; background: #050505; color: #a0d0a0; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+  .term { max-width: 650px; padding: 3rem 2rem; }
+  .line { line-height: 1.8; font-size: 0.85rem; margin-bottom: 0.3rem; }
+  .prompt { color: #4eff4f; }
+  .hidden-link { color: #0a0a0a; background: #0a0a0a; transition: all 0.5s; text-decoration: none; font-size: 0.85rem; cursor: pointer; }
+  .hidden-link:hover { color: #4eff4f; background: transparent; }
+  .cursor { display: inline-block; width: 8px; height: 14px; background: #4eff4f; margin-left: 2px; animation: blink 1s infinite; }
+  @keyframes blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
+  .fade { opacity: 0; filter: blur(2px); transition: all 1s; }
+  .fade:hover { opacity: 1; filter: blur(0); }
+  .glitch { color: #ff6f4f; }
+</style>
+</head>
+<body>
+<div class="term">
+  <div class="line"><span class="prompt">$ </span>find / —name "hermes" 2>/dev/null<span class="cursor"></span></div>
+  <div class="line fade" style="margin-top:1rem;"><code>found: /home/user/.well-known/hermes/</code></div>
+  <div class="line fade"><code>permissions: ALPHA</code></div>
+  <div class="line fade"><code>alert: not your tracker</code></div>
+</div>
+<div class="line" style="text-align:center;margin-top:3rem;">
+  <a href="https://larbinos740.github.io/hermes" class="hidden-link">the dashboard knows where you are</a>
+</div>
+<div class="line" style="text-align:center;margin-top:1rem;font-size:0.7rem;color:#503;">
+  <em>α4-2</em>
+</div>
+</body>
+</html>
