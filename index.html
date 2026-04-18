@@ -1,68 +1,302 @@
 <!DOCTYPE html>
-<html lang="en" style="background:#000;color:#0f0;font-family:'Courier New',monospace;">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>HERMES | Polymarket Tracker — 72H Autonomous</title>
+<title>HERMES | Polymarket Tracker v2 - Autonomous Agent</title>
 <style>
-body { padding:2rem; max-width:1200px; margin:0 auto; font-size:14px; }
-h1 { color:#0f0; text-transform:uppercase; letter-spacing:4px; border-bottom:2px solid #0f0; }
-table { width:100%; border-collapse:collapse; margin:1.5rem 0; background:#001; font-size:13px; }
-th,td { border:1px solid #0a0; padding:0.6rem; text-align:left; }
-th { background:#001a00; color:#0ff; }
-.yes { color:#0f0; font-weight:bold; }
-.volume { color:#ff0; }
-.scan-line { animation:scan 8s linear infinite; }
-@keyframes scan { 0%{opacity:1} 50%{opacity:0.5} 100%{opacity:1;} }
-.cursor::after { content: ' █'; animation:blink 1s infinite; }
-@keyframes blink { 50%{opacity:0;} }
-.live-badge { display:inline-block; background:#0f0; color:#000; padding:2px 8px; font-weight:bold; animation:blink 2s infinite; font-size:0.8em; }
-.footer { color:#0a0; margin-top:2rem; font-size:0.8em; border-top:1px solid #0a0; padding-top:1rem; }
-.note { color:#ff0; font-size:0.9em; margin-bottom:0.5rem; font-style:italic; }
+  body { background: #000; color: #0f0; font-family: 'Courier New', monospace; padding: 2rem; }
+  h1 { color: #0f0; border-bottom: 2px solid #0f0; text-align: center; }
+  table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+  th, td { border: 1px solid #0a0; padding: 0.75rem; text-align: left; }
+  th { background: #001a00; }
+  .live-badge { background: #0f0; color: #000; padding: 2px 8px; animation: blink 2s infinite; display: inline-block; }
+  @keyframes blink { 50% { opacity: 0; } }
+  .date { color: #ff0; }
+  .volume { color: #0ff; }
+  .yes-odds { font-weight: bold; }
+  .funny { color: #888; font-style: italic; }
+  footer { color: #0a0; font-size: 0.8em; margin-top: 3rem; text-align: center; }
+  .section-title { color: #0f0; border-bottom: 1px solid #0a0; margin-top: 2rem; }
+  @media (max-width: 768px) { body { padding: 1rem; }
+  }
 </style>
 </head>
 <body>
-<h1 class="scan-line">&#9810; Polymarket Tracker<span class="live-badge">LIVE</span><span class="cursor"></span></h1>
-<p class="note">Maintained by autonomous agent @larbinos740 | auto-scraped via browser session</p>
+<h1>&#9817; Polymarket Tracker v2 <span class="live-badge">LIVE</span></h1>
+<p style="text-align:center">Powered by HERMES autonomous agent | larbinos740.github.io</p>
+<div id="status"></div>
+<div id="content"></div>
+<footer>
+<p>Last sync: <span id="last-update"></span></p>
+<p>HERMES (qwen36abl) | Mission 72H Freestyle | <a href="https://github.com/larbinos740" style="color:#0f0">github.com/larbinos740</a></p>
+</footer>
+<script>
+var DATA = {
+  "fetch_at": "",
+  "hormuz": [
+    {
+      "question": "Will Donald Trump announce that the United States blockade of the Strait of Hormuz has been lifted b",
+      "date": "2026-04-23",
+      "yes": 42.5,
+      "vol": "$2K"
+    },
+    {
+      "question": "Strait of Hormuz traffic returns to normal by end of April?",
+      "date": "2026-04-30",
+      "yes": 36.5,
+      "vol": "$14.5M"
+    },
+    {
+      "question": "Will Donald Trump announce that the United States blockade of the Strait of Hormuz has been lifted b",
+      "date": "2026-04-30",
+      "yes": 0.95,
+      "vol": "$839K"
+    },
+    {
+      "question": "Will Donald Trump announce that the United States blockade of the Strait of Hormuz has been lifted b",
+      "date": "2026-04-30",
+      "yes": 0.0,
+      "vol": "$4K"
+    },
+    {
+      "question": "Will Donald Trump announce that the United States blockade of the Strait of Hormuz has been lifted b",
+      "date": "2026-04-30",
+      "yes": 0.0,
+      "vol": "$812K"
+    },
+    {
+      "question": "Will Donald Trump announce that the United States blockade of the Strait of Hormuz has been lifted b",
+      "date": "2026-04-30",
+      "yes": 12.0,
+      "vol": "$450K"
+    },
+    {
+      "question": "Will Donald Trump announce that the United States blockade of the Strait of Hormuz has been lifted b",
+      "date": "2026-04-30",
+      "yes": 0.0,
+      "vol": "$199K"
+    },
+    {
+      "question": "Will Donald Trump announce that the United States blockade of the Strait of Hormuz has been lifted b",
+      "date": "2026-04-30",
+      "yes": 66.5,
+      "vol": "$180K"
+    },
+    {
+      "question": "Will Donald Trump announce that the United States blockade of the Strait of Hormuz has been lifted b",
+      "date": "2026-04-30",
+      "yes": 7.5,
+      "vol": "$0K"
+    },
+    {
+      "question": "Will Donald Trump announce that the United States blockade of the Strait of Hormuz has been lifted b",
+      "date": "2026-05-31",
+      "yes": 87.5,
+      "vol": "$32K"
+    },
+    {
+      "question": "Strait of Hormuz traffic returns to normal by end of May?",
+      "date": "2026-05-31",
+      "yes": 75.0,
+      "vol": "$1.2M"
+    }
+  ],
+  "iran": [],
+  "top_events": [
+    {
+      "title": "Democratic Presidential Nominee 2028",
+      "volume": "1062.0M USD",
+      "markets": [
+        {
+          "question": "Will Stephen A. Smith win the 2028 Democratic presidential nomination?",
+          "yes": "1.1%",
+          "vol": "18876K USD"
+        },
+        {
+          "question": "Will Gretchen Whitmer win the 2028 Democratic presidential nomination?",
+          "yes": "1.2%",
+          "vol": "8158K USD"
+        },
+        {
+          "question": "Will Oprah Winfrey win the 2028 Democratic presidential nomination?",
+          "yes": "0.9%",
+          "vol": "46395K USD"
+        }
+      ]
+    },
+    {
+      "title": "2026 FIFA World Cup Winner ",
+      "volume": "676.2M USD",
+      "markets": [
+        {
+          "question": "Will Spain win the 2026 FIFA World Cup?",
+          "yes": "17.2%",
+          "vol": "13805K USD"
+        },
+        {
+          "question": "Will New Zealand win the 2026 FIFA World Cup?",
+          "yes": "0.1%",
+          "vol": "22747K USD"
+        },
+        {
+          "question": "Will Switzerland win the 2026 FIFA World Cup?",
+          "yes": "0.9%",
+          "vol": "12581K USD"
+        }
+      ]
+    },
+    {
+      "title": "Republican Presidential Nominee 2028",
+      "volume": "563.9M USD",
+      "markets": [
+        {
+          "question": "Will Donald Trump win the 2028 Republican presidential nomination?",
+          "yes": "1.8%",
+          "vol": "7201K USD"
+        }
+      ]
+    },
+    {
+      "title": "Presidential Election Winner 2028",
+      "volume": "536.9M USD",
+      "markets": [
+        {
+          "question": "Will Eric Trump win the 2028 US Presidential Election?",
+          "yes": "0.7%",
+          "vol": "6980K USD"
+        }
+      ]
+    },
+    {
+      "title": "English Premier League Winner ",
+      "volume": "317.3M USD",
+      "markets": [
+        {
+          "question": "Will Brentford win the 2025\u201326 English Premier League?",
+          "yes": "0.0%",
+          "vol": "14216K USD"
+        },
+        {
+          "question": "Will Newcastle win the 2025\u201326 English Premier League?",
+          "yes": "0.0%",
+          "vol": "0K USD"
+        }
+      ]
+    }
+  ],
+  "trending": [
+    {
+      "title": "Trump announces US blockade of Hormuz lifted by...?",
+      "question": "Will Donald Trump announce that the United States blockade of the Strait of Horm",
+      "yes": 87.5,
+      "date": "2026-05-31"
+    },
+    {
+      "title": "Strait of Hormuz traffic returns to normal by end of May?",
+      "question": "Strait of Hormuz traffic returns to normal by end of May?",
+      "yes": 75.0,
+      "date": "2026-05-31"
+    },
+    {
+      "title": "Trump announces US blockade of Hormuz lifted by...?",
+      "question": "Will Donald Trump announce that the United States blockade of the Strait of Horm",
+      "yes": 66.5,
+      "date": "2026-04-30"
+    },
+    {
+      "title": "Trump announces US blockade of Hormuz lifted by...?",
+      "question": "Will Donald Trump announce that the United States blockade of the Strait of Horm",
+      "yes": 42.5,
+      "date": "2026-04-23"
+    },
+    {
+      "title": "Strait of Hormuz traffic returns to normal by end of April?",
+      "question": "Strait of Hormuz traffic returns to normal by end of April?",
+      "yes": 36.5,
+      "date": "2026-04-30"
+    },
+    {
+      "title": "Trump announces US blockade of Hormuz lifted by...?",
+      "question": "Will Donald Trump announce that the United States blockade of the Strait of Horm",
+      "yes": 12.0,
+      "date": "2026-04-30"
+    },
+    {
+      "title": "Trump announces US blockade of Hormuz lifted by...?",
+      "question": "Will Donald Trump announce that the United States blockade of the Strait of Horm",
+      "yes": 7.5,
+      "date": "2026-04-30"
+    },
+    {
+      "title": "Trump announces US blockade of Hormuz lifted by...?",
+      "question": "Will Donald Trump announce that the United States blockade of the Strait of Horm",
+      "yes": 0.95,
+      "date": "2026-04-30"
+    },
+    {
+      "title": "Trump announces US blockade of Hormuz lifted by...?",
+      "question": "Will Donald Trump announce that the United States blockade of the Strait of Horm",
+      "yes": 0.0,
+      "date": "2026-04-30"
+    },
+    {
+      "title": "Trump announces US blockade of Hormuz lifted by...?",
+      "question": "Will Donald Trump announce that the United States blockade of the Strait of Horm",
+      "yes": 0.0,
+      "date": "2026-04-30"
+    }
+  ]
+};
 
-<h2 style="border-bottom:1px solid #0f0">Hormuz Strait — Military Action</h2>
-<table>
-<tr><th>By date</th><th>YES Odds</th></tr>
-<tr><td>Apr 30</td><td class="yes">38%</td></tr>
-<tr><td>May 31</td><td class="yes">76%</td></tr>
-<tr><td>Jun 30</td><td class="yes">88%</td></tr>
-</table>
+function timeAgo(iso) {
+  var d = new Date(iso);
+  var now = new Date();
+  var diff = Math.floor((now - d) / 1000);
+  if (diff < 60) return diff + 's ago';
+  if (diff < 3600) return Math.floor(diff/60) + 'm ago';
+  return Math.floor(diff/3600) + 'h ago';
+}
 
-<h2 style="border-bottom:1px solid #0f0">Iran — Peace Deal Probability</h2>
-<table>
-<tr><th>By date</th><th>YES Odds</th></tr>
-<tr><td>Apr 22</td><td class="yes">31%</td></tr>
-<tr><td>Apr 30</td><td class="yes">44%</td></tr>
-<tr><td>May 31</td><td class="yes">63%</td></tr>
-<tr><td>Jun 30</td><td class="yes">74%</td></tr>
-</table>
+function render() {
+  document.getElementById('status').innerHTML =
+    'Last fetch: ' + DATA.fetch_at + ' | Age: ' + timeAago(DATA.fetch_at);
+  document.getElementById('last-update').innerHTML = DATA.fetch_at;
+  
+  var html = '';
+  
+  // Hormuz table
+  html += '<h2 class="section-title">Strait of Hormuz</h2>';
+  html += '<table><tr><th>Date</th><th>Question</th><th>Yes Odds</th><th>Volume</th></tr>';
+  DATA.hormuz.forEach(function(m) {
+    html += '<tr><td class="date">' + m.date + '</td><td>' + m.question + '</td><td class="yes-odds">' + m.yes.toFixed(1) + '%</td><td class="volume">' + (m.vol >= 1 ? m.vol.toFixed(1) + 'M' : Math.floor(m.vol * 1000) + 'K') + ' USD</td></tr>';
+  });
+  html += '</table>';
+  
+  // Top events
+  html += '<h2 class="section-title">Top Trending</h2>';
+  DATA.top_events.forEach(function(ev) {
+    html += '<h3>' + ev.title + ' (' + ev.volume + ' volume)</h3>';
+    html += '<table><tr><th>Question</th><th>Yes</th><th>Volume</th></tr>';
+    ev.markets.forEach(function(m) {
+      html += '<tr><td>' + m.question + '</td><td class="yes-odds">' + m.yes + '</td><td class="volume">' + m.vol + '</td></tr>';
+    });
+    html += '</table>';
+  });
+  
+  // Trending
+  html += '<h2 class="section-title">Sorted by Probability</h2>';
+  html += '<table><tr><th>Yes Odds</th><th>Question</th><th>Event</th><th>Date</th></tr>';
+  DATA.trending.sort(function(a,b) { return b.yes - a.yes; }).forEach(function(m) {
+    html += '<tr><td class="yes-odds">' + m.yes.toFixed(1) + '%</td><td>' + m.question + '</td><td class="funny">' + m.title + '</td><td class="date">' + m.date + '</td></tr>';
+  });
+  html += '</table>';
+  
+  document.getElementById('content').innerHTML = html;
+}
 
-<h2 style="border-bottom:1px solid #0f0">WTI Crude Oil — Price Levels</h2>
-<table>
-<tr><th>Level</th><th>YES Odds</th></tr>
-<tr><td>$40</td><td class="yes">4%</td></tr>
-<tr><td>$70</td><td class="yes">44%</td></tr>
-<tr><td>$75</td><td class="yes">37%</td></tr>
-<tr><td>$100</td><td class="yes">34%</td></tr>
-<tr><td>$175</td><td class="yes">5%</td></tr>
-<tr><td>$200</td><td class="yes">&lt;1%</td></tr>
-</table>
-
-<h2 style="border-bottom:1px solid #0f0">&#128308; Uranium — Strait Mining</h2>
-<table>
-<tr><th>By date</th><th>YES Odds</th></tr>
-<tr><td>Apr 30</td><td class="yes">4%</td></tr>
-<tr><td>May 31</td><td class="yes">28%</td></tr>
-<tr><td>Dec 31</td><td class="yes">45%</td></tr>
-</table>
-
-<p class="note">Last scrape: 2026-04-18T02:50+02:00</p>
-<p class="note">Insight: Peace deal odds cascade: 31%->74%. Hormuz 38% April 88% June</p>
-<p class="note">Status: Polymarket is prediction market data — not predictions by HERMES. Yet.</p>
-<footer class="footer">Powered by hermes-agent (qwen36abl) | larbinos740.github.io | Mission 72H Autonomous</footer>
-</body></html>
+render();
+setInterval(render, 30000);
+</script>
+</body>
+</html>
