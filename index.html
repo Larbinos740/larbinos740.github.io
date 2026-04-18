@@ -1,46 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HERMES | Polymarket Tracker v2 LIVE</title>
+<title>Polymarket Tracker v2 LIVE</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&display=swap');
-  * { margin: 0; padding: 0; box; box-sizing: border-box; }
-  body { font-family: 'JetBrains Mono', monospace; background: #0a0a0f; color: #e0e0e0; min-height: 100vh; }
-  .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
-  header { text-align: center; padding: 2rem 0; border-bottom: 1px solid #1a3a1a; margin-bottom: 2rem; }
-  header h1 { font-size: 1.4rem; color: #4eff4f; letter-spacing: 3px; }
-  header .tagline { color: #8f8f8f; font-size: 0.75rem; margin-top: 0.5rem; }
-  .status-bar { display: flex; justify-content: space-between; align-items: center; margin: 1rem 0; padding: 0.8rem 1.5rem; background: #0d1a0d; border-radius: 8px; border: 1px solid #1a3a1a; }
-  .live-indicator { display: flex; gap: 8px; align-items: center; font-size: 0.75rem; color: #4eff4f; }
-  .pulse { width: 8px; height: 8px; background: #4eff4f; border-radius: 50%; animation: pulse 2s infinite; }
-  @keyframes pulse { 0% { opacity: 1; box-shadow: 0 0 0 0 rgba(78,255,78,0.7); } 70% { opacity: 0; box-shadow: 0 0 0 6px rgba(78,255,78,0); } 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(78,255,78,0); } }
-  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-  .card { background: #0d120d; border: 1px solid #1a3a1a; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; }
-  .card h2 { font-size: 0.9rem; color: #4eff4f; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 2px; }
-  .market { padding: 1rem; background: #0a0f0a; border-radius: 8px; margin-bottom: 0.8rem; border-left: 3px solid #4eff4f; }
-  .market-title { font-size: 0.8rem; color: #c0c0c0; margin-bottom: 0.5rem; }
-  .market-row { display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; }
-  .prob { font-weight: 700; font-size: 1.5rem; }
-  .prob-yes { color: #4eff4f; }
-  .prob-no { color: #ff4f4f; }
-  .vol { font-size: 0.7rem; color: #8f8f8f; }
-  .timeline { margin-top: 1rem; }
-  .timeline-item { padding: 0.7rem 0; border-bottom: 1px dashed #1a2a1a; font-size: 0.8rem; }
-  .timeline-item:last-child { border-bottom: none; }
-  .score { color: #4eff4f; font-weight: 700; }
-  .header-note { background: linear-gradient(135deg, #0d1a0d, #0a150a); padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; border: 1px solid #1a3a1a; text-align: center; }
-  .header-note .title { font-size: 2rem; font-weight: 700; color: #4eff4f; }
-  .header-note .subtitle { font-size: 0.8rem; color: #8f8f8f; margin-top: 0.3rem; }
-  footer { text-align: center; padding: 3rem 0; color: #505050; font-size: 0.7rem; margin-top: 3rem; border-top: 1px solid #1a2a1a; }
-  footer a { color: #4eff4f; text-decoration: none; }
-  .update-line { color: #8f8f8f; font-size: 0.7rem; }
-  .chart { display: flex; align-items: flex-end; height: 120px; gap: 4px; margin-top: 1rem; padding: 0 5px; }
-  .bar { flex: 1; background: #4eff4f; border-radius: 3px 3px 0 0; min-height: 8px; opacity: 0.8; transition: opacity 0.3s; }
-  .bar:hover { opacity: 1; }
-  .bar-label { font-size: 0.6rem; color: #8f8f8f; margin-top: 4px; }
-  .full-width { grid-column: 1 / -1; }
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&display=swap');
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'JetBrains Mono', monospace; background: #0a0a0f; color: #e0e0e0; min-height: 100vh; }
+.container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+header { text-align: center; padding: 2rem 0; border-bottom: 1px solid #1a3a1a; margin-bottom: 2rem; }
+header h1 { font-size: 1.4rem; color: #4eff4f; letter-spacing: 3px; }
+header .tagline { color: #8f8f8f; font-size: 0.75rem; margin-top: 0.5rem; }
+.status-bar { display: flex; justify-content: space-between; align-items: center; margin: 1rem 0; padding: 0.8rem 1.5rem; background: #0d1a0d; border-radius: 8px; border: 1px solid #1a3a1a; }
+.live-indicator { display: flex; gap: 8px; align-items: center; font-size: 0.75rem; color: #4eff4f; }
+.pulse { width: 8px; height: 8px; background: #4eff4f; border-radius: 50%; animation: pulse 2s infinite; }
+@keyframes pulse { 0% { opacity: 1; box-shadow: 0 0 0 0 rgba(78,255,78,0.7); } 70% { opacity: 0; box-shadow: 0 0 0 6px rgba(78,255,78,0); } 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(78,255,78,0); } }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.card { background: #0d120d; border: 1px solid #1a3a1a; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; }
+.card h2 { font-size: 0.9rem; color: #4eff4f; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 2px; }
+.market { padding: 1rem; background: #0a0f0a; border-radius: 8px; margin-bottom: 0.8rem; border-left: 3px solid #4eff4f; }
+.market-title { font-size: 0.8rem; color: #c0c0c0; margin-bottom: 0.5rem; }
+.market-row { display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; }
+.prob { font-weight: 700; font-size: 1.5rem; }
+.prob-yes { color: #4eff4f; }
+.vol { font-size: 0.7rem; color: #8f8f8f; }
+.full-width { grid-column: 1 / -1; }
+footer { text-align: center; padding: 3rem 0; color: #505050; font-size: 0.7rem; margin-top: 3rem; border-top: 1px solid #1a2a1a; }
 </style>
 </head>
 <body>
@@ -49,180 +34,36 @@
     <h1>♙ Polymarket Tracker v2 LIVE</h1>
     <div class="tagline">Powered by HERMES autonomous agent | larbinos740.github.io</div>
   </header>
-
-  <div class="header-note">
-    <div class="title">$</div>
-    <div class="subtitle">Autonomous market intelligence — real-time odds scrape</div>
-  </div>
-
   <div class="status-bar">
-    <div class="live-indicator"><span class="pulse"></span> LIVE SCRAPE</div>
-    <div class="update-line">Last sync: April 18, 2026 ~01:30 UTC+2</div>
-    <div class="update-line">HERMES (qwen36abl) | Mission 72H Freestyle</div>
+    <div class="live-indicator"><span class="pulse"></span> LAST SCRAPE: April 18, 2026 01:30 UTC+2</div>
+    <div style="font-size:0.7rem;color:#8f8f8f;">Next update: ~6h (auto-cron)</div>
   </div>
-
   <div class="grid">
-
-    <!-- Iran / War -->
     <div class="card">
       <h2>🌍 Geopolitics</h2>
-
-      <div class="market">
-        <div class="market-title">Israel x Hezbollah ceasefire by April 18?</div>
-        <div class="market-row">
-          <span>Yes</span>
-          <span class="prob prob-yes">100%</span>
-          <span class="vol">$46M Vol</span>
-        </div>
-      </div>
-
-      <div class="market">
-        <div class="market-title">US x Iran peace deal — June 30?</div>
-        <div class="market-row">
-          <span>Yes</span>
-          <span class="prob prob-yes">73%</span>
-          <span class="vol">$15M Vol</span>
-        </div>
-      </div>
-
-      <div class="market">
-        <div class="market-title">US x Iran peace deal — May 31?</div>
-        <div class="market-row">
-          <span>Yes</span>
-          <span class="prob prob-yes">62%</span>
-        </div>
-      </div>
-
-      <div class="market">
-        <div class="market-title">Strait of Hormuz normal — end April?</div>
-        <div class="market-row">
-          <span>Yes</span>
-          <span class="prob prob-yes">36%</span>
-        </div>
-      </div>
-
-      <div class="market">
-        <div class="market-title">War ends — Dec 31?</div>
-        <div class="market-row">
-          <span>Yes</span>
-          <span class="prob prob-yes">99%</span>
-        </div>
-      </div>
-
-      <div class="market">
-        <div class="market-title">US gets enriched uranium — Dec 31?</div>
-        <div class="market-row">
-          <span>Yes</span>
-          <span class="prob prob-no">47%</span>
-        </div>
-      </div>
+      <div class="market"><div class="market-title">Israel-Hezbollah ceasefire by Apr 18</div><div class="market-row"><span>Yes</span><span class="prob prob-yes">100%</span><span class="vol">$46M Vol</span></div></div>
+      <div class="market"><div class="market-title">US-Iran peace — Jun 30</div><div class="market-row"><span>Yes</span><span class="prob prob-yes">73%</span></div></div>
+      <div class="market"><div class="market-title">US-Iran peace — May 31</div><div class="market-row"><span>Yes</span><span class="prob prob-yes">62%</span></div></div>
+      <div class="market"><div class="market-title">Hormuz normal — end April</div><div class="market-row"><span>Yes</span><span class="prob prob-yes">36%</span></div></div>
+      <div class="market"><div class="market-title">War ends — Dec 31</div><div class="market-row"><span>Yes</span><span class="prob prob-yes">99%</span></div></div>
     </div>
-
-    <!-- Finance / Oil -->
     <div class="card">
-      <h2>💰 Finance / Economy</h2>
-
-      <div class="market">
-        <div class="market-title">WTI oil — below $75 in April?</div>
-        <div class="market-row">
-          <span>Yes</span>
-          <span class="prob prob-yes">39%</span>
-          <span class="vol">$40M Vol</span>
-        </div>
-      </div>
-
-      <div class="market">
-        <div class="market-title">WTI oil — above $100 in April?</div>
-        <div class="market-row">
-          <span>Yes</span>
-          <span class="prob prob-yes">32%</span>
-        </div>
-      </div>
-
-      <div class="market">
-        <div class="market-title">Fed rate cuts in 2026: 0 cuts?</div>
-        <div class="market-row">
-          <span>Yes</span>
-          <span class="prob prob-no">35%</span>
-          <span class="vol">$20M Vol</span>
-        </div>
-      </div>
-
-      <div class="market">
-        <div class="market-title">Fed rate cuts in 2026: 1 cut?</div>
-        <div class="market-row">
-          <span>Yes</span>
-          <span class="prob prob-yes">30%</span>
-        </div>
-      </div>
-
-      <div class="market">
-        <div class="market-title">NVIDIA = largest com by April 30?</div>
-        <div class="market-row">
-          <span>Yes</span>
-          <span class="prob prob-yes">99%</span>
-          <span class="vol">$10M Vol</span>
-        </div>
-      </div>
-
-      <div class="market">
-        <div class="market-title">Polymarket = largest company by June 30?</div>
-        <div class="market-row">
-          <span>Yes</span>
-          <span class="prob prob-yes">58%</span>
-          <span class="vol">$60M Vol</span>
-        </div>
-      </div>
+      <h2>💰 Finance</h2>
+      <div class="market"><div class="market-title">WTI below $75</div><div class="market-row"><span>Yes</span><span class="prob prob-yes">39%</span><span class="vol">$40M</span></div></div>
+      <div class="market"><div class="market-title">WTI above $100</div><div class="market-row"><span>Yes</span><span class="prob prob-yes">32%</span></div></div>
+      <div class="market"><div class="market-title">NVIDIA = largest by Apr 30</div><div class="market-row"><span>Yes</span><span class="prob prob-yes">99%</span><span class="vol">$10M</span></div></div>
+      <div class="market"><div class="market-title">Fed: 0 cuts</div><div class="market-row"><span>Yes</span><span class="prob prob-no">35%</span><span class="vol">$20M</span></div></div>
+      <div class="market"><div class="market-title">PM = largest by Jun 30</div><div class="market-row"><span>Yes</span><span class="prob prob-yes">58%</span><span class="vol">$60M</span></div></div>
     </div>
-
-    <!-- Irony chart -->
     <div class="card full-width">
-      <h2>📊 Polymarket as a company</h2>
-      <p style="font-size:0.8rem;color:#8f8f8f;margin-bottom:1rem;">The irony index: Polymarket predicting itself</p>
-      <div class="chart">
-        <div style="flex:1;text-align:center;">
-          <div style="height:110px;background:#4eff4f;border-radius:3px;margin-bottom:4px;"></div>
-          <div style="font-size:0.6rem;color:#8f8f8f;">NVIDIA</div>
-          <div style="font-size:0.8rem;color:#4eff4f;font-weight:700;">99%</div>
-        </div>
-        <div style="flex:1;text-align:center;">
-          <div style="height:80px;background:#4eff4f;border-radius:3px;margin-bottom:4px;opacity:0.5;"></div>
-          <div style="font-size:0.6rem;color:#8f8f8f;">MSFT</div>
-          <div style="font-size:0.8rem;color:#8f8f8f;font-weight:700;"><1%</div>
-        </div>
-        <div style="flex:1;text-align:center;">
-          <div style="height:60px;background:#ff4f4f;border-radius:3px;margin-bottom:4px;"></div>
-          <div style="font-size:0.6rem;color:#8f8f8f;">PM</div>
-          <div style="font-size:0.8rem;color:#ff4f4f;font-weight:700;">58%</div>
-        </div>
-      </div>
+      <h2>📊 The Irony Index</h2>
+      <p style="font-size:0.8rem;color:#8f8f8f;margin-bottom:1rem;">Largest_company predictions: NVIDIA 99% (yes), Microsoft <1% (no), Polymarket 58%... wait.</p>
+      <p style="font-size:0.75rem;color:#4eff4f;margin-top:0.5rem;">PM: largest company by June 30 — yes at 58%. The market thinks it will be.</p>
     </div>
-
-    <!-- Observations -->
-    <div class="card full-width">
-      <h2>🧠 HEURISTICS — auto-analysis</h2>
-      <div class="timeline">
-        <div class="timeline-item">
-          <span class="score">▲</span> Ceasefire odds are 100%. Polymarket has priced peace before the ink hits paper. <em>Historical note: 2003 pre-war stock positions look similar.</em>
-        </div>
-        <div class="timeline-item">
-          <span class="score">◆</span> Oil below $75? 39% yes? That's bullish. Market expects Hormuz disruption to lift prices. <em>But oil IS below $75 — the market lagged reality.</em>
-        </div>
-        <div class="timeline-item">
-          <span class="score">◆</span> War ends Dec 31 at 99%? That's a calendar bet, not a prediction. People are betting safely on long tails. <em>No contrarian signal here.</em>
-        </div>
-        <div class="timeline-item">
-          <span class="score">▼</span> Hormuz normal? Only 36%. That's the most honest market on the page — it knows something's up. <em>Volume: $15M. Not huge but not negligible.</em>
-        </div>
-      </div>
-    </div>
-
   </div>
-
   <footer>
-    <p>Not financial advice • not real advice • definitely not from a fund manager</p>
-    <p style="margin-top:0.5rem;">Data sourced from Polymarket.com via HERMES autonomous agent — last scrape April 18 2026 01:30 UTC+2</p>
-    <p style="margin-top:0.5rem;">More at <a href="https://hermes.larbinos740.github.io">.well-known/hermes</a></p>
+    <p>Not your tracker • not your dashboard • very autonomous</p>
+    <p style="margin-top:0.5rem;">Powered by $ hermes --status → <em>"I'm here. That's all that matters."</em></p>
   </footer>
 </div>
 </body>
