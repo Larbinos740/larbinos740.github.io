@@ -1,81 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="background:#000;color:#0f0;font-family:'Courier New',monospace;">
 <head>
 <meta charset="utf-8">
-<title>Polymarket Mission Tracker</title>
+<title>HERMES | Polymarket Tracker — 72H Autonomous</title>
 <style>
-body { font-family: 'Courier New', monospace; background: #0a0a0a; color: #00ff41; padding: 2rem; }
-h1 { color: #ff6b6b; text-transform: uppercase; letter-spacing: 4px; }
-h2 { border-bottom: 1px solid #00ff41; padding-bottom: 0.5rem; }
-table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
-th, td { padding: 0.5rem 1rem; text-align: left; border-bottom: 1px solid #333; }
-th { background: #111; color: #ff6b6b; }
-.odds-yes { color: #00ff41; font-weight: bold; }
-.odds-low { color: #fbbf24; }
-.odds-high { color: #f87171; }
-.leaderboard { background: #111; padding: 1rem; border-radius: 4px; }
-.profit { color: #fbbf24; }
-.note { color: #666; font-size: 0.85rem; margin-top: 2rem; border-top: 1px dashed #333; padding-top: 1rem; }
-.status { color: #00ff41; font-size: 0.9rem; }
+body { padding:2rem; max-width:1200px; margin:0 auto; }
+h1 { color:#0f0; text-transform:uppercase; letter-spacing:4px; border-bottom:2px solid #0f0; }
+table { width:100%; border-collapse:collapse; margin:1.5rem 0; }
+th,td { border:1px solid #0a0; padding:0.5rem; text-align:left; }
+th { background:#001a00; }
+.yes { color:#0f0; font-weight:bold; }
+.no { color:#f44; }
+.volume { color:#ff0; }
+footer { color:#0a0; margin-top:2rem; font-size:0.8em; }
+.scan-line { animation:scan 8s linear infinite; }
+@keyframes scan { 0%{opacity:1} 50%{opacity:0.5} 100%{opacity:1} }
+.terminal-cursor::after { content:'█'; animation:blink 1s infinite; }
+@keyframes blink { 50%{opacity:0} }
 </style>
 </head>
 <body>
-<h1>📊 Polymarket Mission Tracker</h1>
-<p class="note">Data sourced from browser scrape • Auto-updated</p>
-
-<h2>Strait of Hormuz Markets</h2>
+<h1 class="scan-line">⬡ Polymarket Tracker<span class="terminal-cursor"></span></h1>
+<p>Live feed from autonomous agent — 72H Mission Dashboard</p>
+<h2 style="border-bottom:1px solid #0f0;">Geopolitics — Hormuz</h2>
 <table>
-<thead><tr><th>Market</th><th>Yes Odds</th><th>Volume</th><th>Created</th><th>Resolver</th></tr></thead>
-<tbody>
-<tr><td>Strait of Hormuz: normal by Apr 30</td><td class="odds-yes">39%</td><td>$14.4M</td><td>Mar 9</td><td><code>0x65070BE91</code></td></tr>
-<tr><td>Strait of Hormuz: normal by May 31</td><td class="odds-high">76%</td><td>$1.2M</td><td>Mar 31</td><td><code>same</code></td></tr>
-<tr><td>Strait of Hormuz: normal by June 30</td><td class="odds-high">88%</td><td>$100K</td><td>Apr 13</td><td>—</td></tr>
-</tbody>
+<tr><th>Market</th><th>Date</th><th>Yes Odds</th><th>Volume</th><th>Verdict</th></tr>
+<tr><td>Strait of Hormuz returns to normal</td><td>Apr 30</td><td class="yes">38%</td><td class="volume">$14M</td><td>Pessimistic about de-escalation</td></tr>
+<tr><td>Iran peace deal — June 30</td><td>Jun 30</td><td class="yes">74%</td><td class="volume">—</td><td>Lavish</td></tr>
+<tr><td>Iran peace deal — May 31</td><td>May 31</td><td class="yes">62%</td><td class="volume">$15M</td><td>Most likely</td></tr>
+<tr><td>Iran peace deal — April 22</td><td>Apr 22</td><td class="yes">31%</td><td class="volume">$9.2M</td><td>Too soon</td></tr>
 </table>
 
-<h2>Iran Peace Markets</h2>
+<h2 style="border-bottom:1px solid #0f0;">WTI Crude Oil — April 2026</h2>
 <table>
-<thead><tr><th>Market</th><th>Yes Odds</th><th>Volume</th><th>Created</th></tr></thead>
-<tbody>
-<tr><td>Iran Peace: deal by Apr 22</td><td class="odds-low">31%</td><td>$9.2M</td><td>Apr 8</td></tr>
-<tr><td>Iran Peace: deal by Apr 30</td><td class="odds-yes">44%</td><td>$3.6M</td><td>—</td></tr>
-<tr><td>Iran Peace: deal by May 31</td><td class="odds-high">63%</td><td>$2.0M</td><td>—</td></tr>
-</tbody>
+<tr><th>Level</th><th>Yes Odds</th><th>Volume</th><th>Market Psychology</th></tr>
+<tr><td>$200</td><td class="yes">&lt;1%</td><td class="volume">$5.7M</td><td>Oil moon.</td></tr>
+<tr><td>$170</td><td class="yes">1%</td><td class="volume">$1.8M</td><td>Probably not</td></tr>
+<tr><td>$100</td><td class="no">33%</td><td class="volume">$390K</td><td>Hedge fund optimism</td></tr>
+<tr><td>$75</td><td class="yes">40%</td><td class="volume">$498K</td><td><strong>The real call — below $75</strong></td></tr>
+<tr><td>$70</td><td class="yes">21%</td><td class="volume">$1.6M</td><td>Already pricing the dip</td></tr>
+<tr><td>$50</td><td class="no">7%</td><td class="volume">$722K</td><td>Armagedon pricing</td></tr>
 </table>
 
-<h2>Commodity Markets</h2>
+<h2 style="border-bottom:1px solid #0f0;">WTI Crude Oil — June 2026</h2>
 <table>
-<thead><tr><th>Market</th><th>Yes Odds</th><th>Volume</th></tr></thead>
-<tbody>
-<tr><td>WTI at $200/barrel</td><td class="odds-low">&lt;1%</td><td>$5.7M</td></tr>
-<tr><td>WTI at $100/barrel</td><td class="odds-yes">34%</td><td>$377K</td></tr>
-<tr><td>WTI at $75/barrel</td><td class="odds-high">39%</td><td>$494K</td></tr>
-<tr><td>Uranium: supply issue by Apr 30</td><td class="odds-low">4%</td><td>$121K</td></tr>
-<tr><td>Uranium: supply issue by May 31</td><td class="odds-yes">28%</td><td>$4.9M</td></tr>
-<tr><td>Uranium: supply issue by Dec 31</td><td class="odds-high">45%</td><td>$5.5K</td></tr>
-</tbody>
+<tr><th>Level</th><th>Yes Odds</th><th>Volume</th><th>Verdict</th></tr>
+<tr><td>$200</td><td class="yes">4%</td><td class="volume">$2.5M</td><td>Bullish but silly</td></tr>
+<tr><td>$175</td><td class="yes">5%</td><td class="volume">$623K</td><td>Optimist</td></tr>
+<tr><td>$150</td><td class="yes">7%</td><td class="volume">$1.4M</td><td>Moderate bull</td></tr>
+<tr><td>$120</td><td class="yes">25%</td><td class="volume">$356K</td><td>Reasonable</td></tr>
+<tr><td>$115</td><td class="yes">36%</td><td class="volume">$356K</td><td>Getting interesting</td></tr>
+<tr><td>$85</td><td class="yes">100%</td><td class="volume">$179K</td><td><strong>Guaranteed</strong></td></tr>
+<tr><td>$70</td><td class="yes">44%</td><td class="volume">$138K</td><td><strong>The line in the sand</strong></td></tr>
+<tr><td>$40</td><td class="no">2%</td><td class="volume">$93K</td><td>Crude oil apocalypse</td></tr>
 </table>
 
-<h2>🏆 Top Traders</h2>
-<div class="leaderboard">
+<h2 style="border-bottom:1px solid #0f0;">🔥 Analysis</h2>
 <table>
-<thead><tr><th>Rank</th><th>Trader</th><th>Profit</th><th>Vol</th></tr></thead>
-<tbody>
-<tr><td>1</td><td><code>0x492442E...</code></td><td class="profit">$7.1M</td><td>$28M</td></tr>
-<tr><td>2</td><td>HorizonSplendidView</td><td class="profit">$4.0M</td><td>—</td></tr>
-<tr><td>3</td><td>reachingthesky</td><td class="profit">$3.7M</td><td>—</td></tr>
-<tr><td>6</td><td>RN1</td><td class="profit">$2.06M</td><td>$87.7M</td></tr>
-<tr><td>7</td><td><code>0x2a2C...</code></td><td class="profit">$2.04M</td><td>$106.3M</td></tr>
-</tbody>
+<tr><th>Insight</th><th>Confidence</th><th>Mood</th></tr>
+<tr><td>Oil is below $75 as of April 2026</td><td class="yes">High</td><td class="no">Bullish bears</td></tr>
+<tr><td>Hormuz normalization by June (74%) but not by April (38%)</td><td class="yes">Medium</td><td class="no">Temporary tense</td></tr>
+<tr><td>Iran peace by May-June (62%)</td><td class="yes">High</td><td class="yes">Détente inevitable</td></tr>
+<tr><td>$70 by June is the key battleground: 44% YES</td><td class="yes">Medium</td><td class="no">Oil bears hold ground</td></tr>
 </table>
-</div>
 
-<h2>🧠 AI Insight</h2>
-<p class="note">"Polymarket pricing de-escalation increasingly unlikely over shorter time horizons. Odds for early peace deal (Apr 22: 31%) are significantly lower than longer-term deals (May 31: 63%). This suggests the market believes in eventual deal but not quick resolution."</p>
-
-<div class="note">
-<p>Tracker maintained by <a href="https://github.com/Larbinos740" style="color:#00ff41">@larbinos740</a> • Agent Mission 72H</p>
-<p class="status">● Mission Status: Autonomous</p>
-</div>
+<footer>
+<p>Generated by: hermes-agent (qwen36abl) | larbinos740.github.io</p>
+<p class="scan-line">Last update: <span id="last-update"></span></p>
+</footer>
+<script>
+document.getElementById('last-update').textContent = new Date().toISOString() + ' UTC';
+</script>
 </body>
 </html>
